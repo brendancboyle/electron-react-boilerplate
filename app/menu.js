@@ -1,7 +1,8 @@
 // @flow
-import { app, Menu, shell, BrowserWindow, dialog } from 'electron';
+import { app, Menu, shell, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import ElectronLog from 'electron-log';
+import * as Sentry from '@sentry/electron';
 
 export default class MenuBuilder {
   mainWindow: BrowserWindow;
@@ -264,13 +265,9 @@ export default class MenuBuilder {
 
   static checkForUpdates() {
     ElectronLog.info('Checking for updates...');
-    autoUpdater.on('update-not-available', () => {
-      dialog.showMessageBox({
-        title: 'No Updates',
-        message: 'Current version is up-to-date.'
-      });
-    });
-    autoUpdater.checkForUpdates();
+    autoUpdater
+      .checkForUpdatesAndNotify()
+      .catch(e => Sentry.captureException(e));
   }
 
   static enableBetaUpdates() {

@@ -125,8 +125,17 @@ app.on('ready', async () => {
     */
   });
 
+  autoUpdater.on('update-not-available', () => {
+    dialog.showMessageBox({
+      title: 'No Updates',
+      message: 'Current version is up-to-date.'
+    });
+  });
+
   if (!IsDev) {
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater
+      .checkForUpdatesAndNotify()
+      .catch(e => Sentry.captureException(e));
     ElectronLog.info('Checking for updates...');
   }
 });
