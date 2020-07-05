@@ -1,3 +1,15 @@
+# 0.18.1 (2019.12.12)
+
+- Fix HMR env bug ([#2343](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/2343))
+- Bump all deps to latest semver
+- Bump to `electron@7`
+
+# 0.18.0 (2019.11.19)
+
+- Bump electron to `electron@6` (`electron@7` introduces breaking changes to testcafe end to end tests)
+- Revert back to [two `package.json` structure](https://www.electron.build/tutorials/two-package-structure)
+- Bump all deps to latest semver
+
 # 0.17.1 (2018.11.20)
 
 - Fix `yarn test-e2e` and testcafe for single package.json structure
